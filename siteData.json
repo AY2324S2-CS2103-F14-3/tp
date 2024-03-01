@@ -7,7 +7,7 @@
       "headings": {
         "about-us": "About Us",
         "project-team": "Project team",
-        "john-doe": "John Doe",
+        "tejas-garrepally": "Tejas Garrepally",
         "gautham-kailash": "Gautham Kailash",
         "johnny-doe": "Johnny Doe",
         "jean-doe": "Jean Doe",
@@ -146,6 +146,14 @@
     {
       "src": "team/kailashgautham.md",
       "title": "Kailash Gautham's Project Portfolio Page",
+      "headings": {
+        "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/tejasgarrepally.md",
+      "title": "Tejas Garrepally's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
       },
