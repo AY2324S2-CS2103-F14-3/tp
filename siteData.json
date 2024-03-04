@@ -10,7 +10,7 @@
         "tejas-garrepally": "Tejas Garrepally",
         "gautham-kailash": "Gautham Kailash",
         "ivan-ang": "Ivan Ang",
-        "jean-doe": "Jean Doe",
+        "axel-teo": "Axel Teo",
         "james-doe": "James Doe"
       },
       "headingKeywords": {}
@@ -162,6 +162,14 @@
     {
       "src": "team/tejasgarrepally.md",
       "title": "Tejas Garrepally's Project Portfolio Page",
+      "headings": {
+        "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/teojunda.md",
+      "title": "Axel's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
       },
