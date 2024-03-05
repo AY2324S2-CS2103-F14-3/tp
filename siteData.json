@@ -11,7 +11,7 @@
         "gautham-kailash": "Gautham Kailash",
         "ivan-ang": "Ivan Ang",
         "axel-teo": "Axel Teo",
-        "james-doe": "James Doe"
+        "ng-yu-soon": "Ng Yu Soon"
       },
       "headingKeywords": {}
     },
@@ -154,6 +154,14 @@
     {
       "src": "team/kailashgautham.md",
       "title": "Kailash Gautham's Project Portfolio Page",
+      "headings": {
+        "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/ngyusoon.md",
+      "title": "Yu Soon's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
       },
