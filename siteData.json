@@ -113,7 +113,7 @@
         "viewing-help-help": "Viewing help : help",
         "adding-a-person-ac": "Adding a person: ac",
         "listing-all-persons-list": "Listing all persons : list",
-        "editing-a-person-edit": "Editing a person : edit",
+        "updating-a-person-uc": "Updating a person : uc",
         "locating-persons-by-name-find": "Locating persons by name: find",
         "deleting-a-person-delete": "Deleting a person : delete",
         "clearing-all-entries-clear": "Clearing all entries : clear",
