@@ -12,6 +12,7 @@ import seedu.address.model.person.ClassGroup;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 
@@ -142,5 +143,24 @@ public class ParserUtil {
             throw new ParseException(ClassGroup.MESSAGE_CONSTRAINTS);
         }
         return Optional.of(new Github(trimmedGithub));
+    }
+
+    /**
+     * Parses a {@code String note} into an {@code Optional<Note>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param note The note content to parse.
+     * @return An optional containing the parsed note, or an empty optional if the note is empty.
+     * @throws ParseException if the given {@code note} is invalid.
+     */
+    public static Optional<Note> parseNote(String note) throws ParseException {
+        if (note.isEmpty()) {
+            return Optional.of(Note.EMPTY);
+        }
+        String trimmedNote = note.trim();
+        if (!Note.isValidNote(trimmedNote)) {
+            throw new ParseException(ClassGroup.MESSAGE_CONSTRAINTS);
+        }
+        return Optional.of(new Note(trimmedNote));
     }
 }
