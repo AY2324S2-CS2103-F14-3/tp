@@ -53,6 +53,15 @@ public class Note {
     }
 
     /**
+     * Retrieves the list of notes associated with this Person.
+     *
+     * @return The list of notes associated with this Person.
+     */
+    public ArrayList<String> getNote() {
+        return this.notes;
+    }
+
+    /**
      * Returns true if a given string is a valid note.
      *
      * @param test The string to test.
