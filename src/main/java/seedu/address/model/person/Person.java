@@ -21,12 +21,13 @@ public class Person {
     private final Phone phone;
     private final Optional<Telegram> telegram;
     private final Optional<Github> github;
+    private final Optional<Note> note;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, ClassGroup classGroup, Email email, Phone phone,
-                  Optional<Telegram> telegram, Optional<Github> github) {
+                  Optional<Telegram> telegram, Optional<Github> github, Optional<Note> note) {
         requireAllNonNull(name, classGroup, email, phone);
         this.name = name;
         this.classGroup = classGroup;
@@ -34,6 +35,7 @@ public class Person {
         this.phone = phone;
         this.telegram = telegram;
         this.github = github;
+        this.note = note;
     }
 
     public Name getName() {
@@ -58,6 +60,10 @@ public class Person {
 
     public Optional<Github> getGithub() {
         return github;
+    }
+
+    public Optional<Note> getNote() {
+        return note;
     }
 
     /**
@@ -136,7 +142,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, classGroup, email, phone, telegram, github);
+        return Objects.hash(name, classGroup, email, phone, telegram, github, note);
     }
 
     @Override
@@ -148,6 +154,7 @@ public class Person {
                 .add("phone", phone)
                 .add("telegram", telegram.isPresent() ? telegram.get() : "")
                 .add("github", github.isPresent() ? github.get() : "")
+                .add("note", note.isPresent() ? note.get() : "")
                 .toString();
     }
 }
