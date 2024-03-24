@@ -22,6 +22,7 @@ import seedu.address.model.person.ClassGroup;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
@@ -52,6 +53,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NO_CHANGE = "The updated person is the same as the original person";
     public static final String MESSAGE_DUPLICATE_FIELD = "The updated person contains duplicate fields"
             + "(Email, Phone, Telegram, or Github) with another person.";
+    private static Optional<Note> note;
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -78,6 +80,7 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        note = Optional.of(personToEdit.getNote().orElse(Note.EMPTY));
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
         updatePerson(personToEdit, editedPerson, model);
         updateLastViewedPersonIfNecessary(personToEdit, editedPerson, model);
@@ -118,7 +121,7 @@ public class EditCommand extends Command {
         Optional<Github> updatedGithub = editPersonDescriptor.getGithub().isPresent()
                 ? editPersonDescriptor.getGithub() : personToEdit.getGithub();
         return new Person(updatedName, updatedClassGroup, updatedEmail,
-                updatedPhone, updatedTelegram, updatedGithub);
+                updatedPhone, updatedTelegram, updatedGithub, note);
     }
 
     @Override
