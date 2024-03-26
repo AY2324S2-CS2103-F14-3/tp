@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
@@ -159,8 +160,11 @@ public class ParserUtil {
         }
         String trimmedNote = note.trim();
         if (!Note.isValidNote(trimmedNote)) {
-            throw new ParseException(ClassGroup.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+        } else {
+            ArrayList<String> notes = new ArrayList<>();
+            notes.add(trimmedNote);
+            return Optional.of(new Note(notes));
         }
-        return Optional.of(new Note(trimmedNote));
     }
 }
