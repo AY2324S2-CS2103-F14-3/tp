@@ -14,6 +14,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -23,6 +25,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDNOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
@@ -55,7 +58,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + CLASS_GROUP_DESC_BOB
-                + EMAIL_DESC_BOB + PHONE_DESC_BOB + TELEGRAM_DESC_BOB + GITHUB_DESC_BOB,
+                + EMAIL_DESC_BOB + PHONE_DESC_BOB + TELEGRAM_DESC_BOB + GITHUB_DESC_BOB + NOTE_DESC_BOB,
                 new AddCommand(expectedPerson));
 
 
@@ -64,14 +67,14 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + CLASS_GROUP_DESC_BOB + EMAIL_DESC_BOB + PHONE_DESC_BOB
-                        + TELEGRAM_DESC_BOB + GITHUB_DESC_BOB,
+                        + TELEGRAM_DESC_BOB + GITHUB_DESC_BOB + NOTE_DESC_BOB,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + CLASS_GROUP_DESC_BOB + EMAIL_DESC_BOB
-                + PHONE_DESC_BOB + TELEGRAM_DESC_BOB + GITHUB_DESC_BOB;
+                + PHONE_DESC_BOB + TELEGRAM_DESC_BOB + GITHUB_DESC_BOB + NOTE_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -90,7 +93,7 @@ public class AddCommandParserTest {
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
                         + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_CLASS_GROUP,
-                        PREFIX_EMAIL, PREFIX_PHONE, PREFIX_GITHUB, PREFIX_TELEGRAM));
+                        PREFIX_EMAIL, PREFIX_PHONE, PREFIX_GITHUB, PREFIX_TELEGRAM, PREFIX_ADDNOTE));
 
         // invalid value followed by valid value
 
@@ -126,7 +129,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).build();
         assertParseSuccess(parser, NAME_DESC_AMY + CLASS_GROUP_DESC_AMY + EMAIL_DESC_AMY + PHONE_DESC_AMY
-                + TELEGRAM_DESC_AMY + GITHUB_DESC_AMY, new AddCommand(expectedPerson));
+                + TELEGRAM_DESC_AMY + GITHUB_DESC_AMY + NOTE_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test
