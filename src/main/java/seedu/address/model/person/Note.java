@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
 
@@ -16,7 +15,7 @@ public class Note {
     /**
      * Represents an empty note.
      */
-    public static final Note EMPTY = new Note("", true);
+    public static final Note EMPTY = new Note(new ArrayList<>(), true);
 
     /*
      * The first character of the address must not be a whitespace,
@@ -24,32 +23,32 @@ public class Note {
      */
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9_.-]+$";
 
-    private final String noteToAdd;
-    private final ArrayList<String> notes = new ArrayList<>();
+    public final ArrayList<String> notes;
 
     /**
-     * Constructs a {@code Note}.
+     * Constructs a {@code Note} with the specified list of notes.
      *
-     * @param noteToAdd A valid note.
+     * @param notes The list of notes.
      */
-    public Note(String noteToAdd) {
-        requireNonNull(noteToAdd);
-        checkArgument(isValidNote(noteToAdd), MESSAGE_CONSTRAINTS);
-        this.noteToAdd = noteToAdd;
-        notes.add(noteToAdd);
+    public Note(ArrayList<String> notes) {
+        requireNonNull(notes);
+        this.notes = new ArrayList<>(notes);
     }
 
     /**
-     * Constructs a {@code Note}.
+     * Constructs an empty {@code Note}.
      *
-     * @param noteToAdd An empty string.
      * @param isSentinel Boolean flag to differentiate this constructor from the primary constructor.
      */
-    private Note(String noteToAdd, boolean isSentinel) {
+    private Note(ArrayList<String> arrayList, boolean isSentinel) {
         if (!isSentinel) {
             throw new IllegalArgumentException("This constructor is only for creating the EMPTY object");
         }
-        this.noteToAdd = noteToAdd;
+        this.notes = arrayList;
+    }
+
+    public void addNote(String noteToAdd) {
+        this.notes.add(noteToAdd);
     }
 
     /**
@@ -77,7 +76,7 @@ public class Note {
      * @return True if the note is empty, false otherwise.
      */
     public boolean isEmpty() {
-        return noteToAdd.isEmpty();
+        return notes.isEmpty();
     }
 
     /**
@@ -87,7 +86,15 @@ public class Note {
      */
     @Override
     public String toString() {
-        return notes.toString();
+        if (notes.isEmpty()) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (String s : notes) {
+            sb.append(s);
+            sb.append("/n");
+        }
+        return sb.toString();
     }
 
     /**
@@ -97,6 +104,6 @@ public class Note {
      */
     @Override
     public int hashCode() {
-        return noteToAdd.hashCode();
+        return notes.hashCode();
     }
 }
