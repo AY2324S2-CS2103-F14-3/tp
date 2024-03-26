@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDNOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
@@ -17,6 +18,7 @@ import seedu.address.model.person.ClassGroup;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
@@ -34,22 +36,23 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CLASS_GROUP, PREFIX_EMAIL,
-                        PREFIX_PHONE, PREFIX_TELEGRAM, PREFIX_GITHUB);
+                        PREFIX_PHONE, PREFIX_TELEGRAM, PREFIX_GITHUB, PREFIX_ADDNOTE);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_CLASS_GROUP, PREFIX_EMAIL, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CLASS_GROUP,
-                PREFIX_EMAIL, PREFIX_PHONE, PREFIX_TELEGRAM, PREFIX_GITHUB);
+                PREFIX_EMAIL, PREFIX_PHONE, PREFIX_TELEGRAM, PREFIX_GITHUB, PREFIX_ADDNOTE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         ClassGroup classGroup = ParserUtil.parseClassGroup(argMultimap.getValue(PREFIX_CLASS_GROUP).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Optional<Telegram> telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).orElse(""));
         Optional<Github> github = ParserUtil.parseGithub(argMultimap.getValue(PREFIX_GITHUB).orElse(""));
+        Optional<Note> note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_ADDNOTE).orElse(""));
 
-        Person person = new Person(name, classGroup, email, phone, telegram, github);
+        Person person = new Person(name, classGroup, email, phone, telegram, github, note);
 
         return new AddCommand(person);
     }
