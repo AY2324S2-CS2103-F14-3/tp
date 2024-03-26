@@ -154,7 +154,7 @@ public class Person {
                 .add("phone", phone)
                 .add("telegram", telegram.isPresent() ? telegram.get() : "")
                 .add("github", github.isPresent() ? github.get() : "")
-                .add("note", note.isPresent() ? note.get() : "")
+                .add("note", note.isPresent() ? note.get().toString() : "")
                 .toString();
     }
 }
