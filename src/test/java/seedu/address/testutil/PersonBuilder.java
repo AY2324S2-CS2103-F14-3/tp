@@ -1,11 +1,13 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import seedu.address.model.person.ClassGroup;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
@@ -21,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_TELEGRAM = "@amybee";
     public static final String DEFAULT_GITHUB = "amybee";
     public static final String DEFAULT_CLASS_GROUP = "B01";
+    private static final String DEFAULT_NOTE = "hardworking";
 
     private Name name;
     private Phone phone;
@@ -28,6 +31,7 @@ public class PersonBuilder {
     private ClassGroup classGroup;
     private Optional<Telegram> telegram;
     private Optional<Github> github;
+    private Optional<Note> note;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,6 +43,9 @@ public class PersonBuilder {
         github = Optional.of(new Github(DEFAULT_GITHUB));
         telegram = Optional.of(new Telegram(DEFAULT_TELEGRAM));
         classGroup = new ClassGroup(DEFAULT_CLASS_GROUP);
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add(DEFAULT_NOTE);
+        note = Optional.of(new Note(arrayList));
     }
 
     /**
@@ -51,6 +58,7 @@ public class PersonBuilder {
         github = personToCopy.getGithub();
         telegram = personToCopy.getTelegram();
         classGroup = personToCopy.getClassGroup();
+        note = personToCopy.getNote();
     }
 
     /**
@@ -78,7 +86,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, classGroup, email, phone, telegram, github);
+        return new Person(name, classGroup, email, phone, telegram, github, note);
     }
 
     /**
@@ -102,6 +110,16 @@ public class PersonBuilder {
      */
     public PersonBuilder withGithub(String github) {
         this.github = Optional.of(new Github(github));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Note} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNote(String note) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add(note);
+        this.note = Optional.of(new Note(arrayList));
         return this;
     }
 }

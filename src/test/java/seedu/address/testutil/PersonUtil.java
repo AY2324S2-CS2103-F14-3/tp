@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDNOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
@@ -36,6 +37,8 @@ public class PersonUtil {
                 ? person.getTelegram().get().telegramId : "") + " ");
         sb.append(PREFIX_GITHUB + (person.getGithub().isPresent()
                 ? person.getGithub().get().githubId : "") + " ");
+        sb.append(PREFIX_ADDNOTE + ((person.getNote().isPresent())
+                ? person.getNote().get().getNote().get(0) : "") + "");
         return sb.toString();
     }
 

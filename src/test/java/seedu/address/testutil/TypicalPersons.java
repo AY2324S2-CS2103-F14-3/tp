@@ -32,7 +32,7 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withClassGroup("A-1").withEmail("johnd@example.com")
             .withPhone("98765432")
-            .withTelegram("@bensonmeier").withGithub("meierbenson").build();
+            .withTelegram("@bensonmeier").withGithub("meierbenson").withNote("hardworking").build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withClassGroup("A-2").withEmail("heinz@example.com")
@@ -74,12 +74,12 @@ public class TypicalPersons {
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
             .withClassGroup(VALID_CLASS_GROUP_AMY).withEmail(VALID_EMAIL_AMY)
             .withPhone(VALID_PHONE_AMY)
-            .withTelegram(VALID_TELEGRAM_AMY).build();
+            .withTelegram(VALID_TELEGRAM_AMY).withNote("hardworking").build();
 
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withClassGroup(VALID_CLASS_GROUP_BOB).withEmail(VALID_EMAIL_BOB)
             .withPhone(VALID_PHONE_BOB)
-            .withTelegram(VALID_TELEGRAM_BOB).withGithub(VALID_GITHUB_BOB).build();
+            .withTelegram(VALID_TELEGRAM_BOB).withGithub(VALID_GITHUB_BOB).withNote("hardworking").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
