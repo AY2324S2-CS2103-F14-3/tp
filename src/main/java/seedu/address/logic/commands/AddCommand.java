@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDNOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
@@ -28,14 +29,16 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_PHONE + "PHONE "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM ID] "
-            + "[" + PREFIX_GITHUB + "GITHUB ID]...\n"
+            + "[" + PREFIX_GITHUB + "GITHUB ID] "
+            + "[" + PREFIX_ADDNOTE + "NOTE TO ADD" + "...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_CLASS_GROUP + "F14-3 "
             + PREFIX_EMAIL + "johndoe@gmail.com "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_TELEGRAM + "@johndoe "
-            + PREFIX_GITHUB + "johnDoeGithub ";
+            + PREFIX_GITHUB + "johnDoeGithub "
+            + PREFIX_ADDNOTE + "hardworking ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_FIELD = "This person contains duplicate fields"
