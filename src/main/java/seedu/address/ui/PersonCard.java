@@ -1,15 +1,13 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Github;
-import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 
 /**
@@ -48,8 +46,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label note;
-    @FXML
     private FlowPane tags;
 
     /**
@@ -62,25 +58,11 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         classGroup.setText(person.getClassGroup().classGroup);
         email.setText("E-mail: " + person.getEmail().value);
-        phone.setText("Phone Number: " + person.getPhone().value);
+        phone.setText(
+                "Phone Number: " + person.getPhone().orElse(Phone.EMPTY).value);
         telegram.setText(
                 "Telegram ID: " + person.getTelegram().orElse(Telegram.EMPTY).telegramId);
         github.setText(
                 "GitHub ID: " + person.getGithub().orElse(Github.EMPTY).githubId);
-        ArrayList<String> notes = person.getNote().orElse(Note.EMPTY).notes;
-        String noteStr = listOfNotes(notes);
-        note.setText("Note: " + noteStr);
-    }
-
-    private String listOfNotes(ArrayList<String> note) {
-        if (note.isEmpty()) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        for (String s : note) {
-            sb.append(s);
-            sb.append("\n");
-        }
-        return sb.toString();
     }
 }
