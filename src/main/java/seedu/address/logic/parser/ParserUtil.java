@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
@@ -58,13 +57,16 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
+    public static Optional<Phone> parsePhone(String phone) throws ParseException {
+        if (phone.isEmpty()) {
+            return Optional.of(Phone.EMPTY);
+        }
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return Optional.of(new Phone(trimmedPhone));
     }
 
     /**
@@ -147,24 +149,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String note} into an {@code Optional<Note>}.
+     * Parses a {@code String note} into an {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param note The note content to parse.
-     * @return An optional containing the parsed note, or an empty optional if the note is empty.
      * @throws ParseException if the given {@code note} is invalid.
      */
-    public static Optional<Note> parseNote(String note) throws ParseException {
-        if (note.isEmpty()) {
-            return Optional.of(Note.EMPTY);
-        }
+    public static Note parseNote(String note) throws ParseException {
+        requireNonNull(note);
         String trimmedNote = note.trim();
         if (!Note.isValidNote(trimmedNote)) {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
-        } else {
-            ArrayList<String> notes = new ArrayList<>();
-            notes.add(trimmedNote);
-            return Optional.of(new Note(notes));
         }
+        return new Note(note);
     }
 }
