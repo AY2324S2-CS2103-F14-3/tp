@@ -12,6 +12,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
@@ -29,23 +30,23 @@ class JsonAdaptedPerson {
     private final String classGroup;
     private final String telegram;
     private final String github;
-    private final ArrayList<String> note;
+    private final ArrayList<String> notes;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("classGroup") String classGroup,
-            @JsonProperty("telegram") String telegram, @JsonProperty("github") String github,
-                             @JsonProperty("note") ArrayList<String> note) {
+                             @JsonProperty("email") String email, @JsonProperty("classGroup") String classGroup,
+                             @JsonProperty("telegram") String telegram, @JsonProperty("github") String github,
+                             @JsonProperty("notes") ArrayList<String> notes) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.classGroup = classGroup;
         this.telegram = telegram;
         this.github = github;
-        this.note = note;
+        this.notes = notes;
     }
 
     /**
@@ -53,12 +54,12 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        phone = source.getPhone().orElse(Phone.EMPTY).value;
         email = source.getEmail().value;
         classGroup = source.getClassGroup().classGroup;
         telegram = source.getTelegram().orElse(Telegram.EMPTY).telegramId;
         github = source.getGithub().orElse(Github.EMPTY).githubId;
-        note = source.getNote().orElse(Note.EMPTY).getNote();
+        notes = source.getNotes().getAsStrings();
     }
 
     /**
@@ -67,7 +68,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -76,13 +76,14 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
+        final Optional<Phone> modelPhone;
+        if (phone == null || phone.isEmpty()) {
+            modelPhone = Optional.of(Phone.EMPTY);
+        } else if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        } else {
+            modelPhone = Optional.of(new Phone(phone));
         }
-        final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -119,13 +120,17 @@ class JsonAdaptedPerson {
             modelGithub = Optional.of(new Github(github));
         }
 
-        final Optional<Note> modelNote;
-        if (note == null || note.isEmpty()) {
-            modelNote = Optional.of(Note.EMPTY);
-        } else {
-            modelNote = Optional.of(new Note(note));
+        final Notes modelNotes = new Notes();
+        if (notes == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Notes.class.getSimpleName()));
+        }
+        for (String note: notes) {
+            if (!Note.isValidNote(note)) {
+                Note modelNote = new Note(note);
+                modelNotes.addNote(modelNote);
+            }
         }
 
-        return new Person(modelName, modelClassGroup, modelEmail, modelPhone, modelTelegram, modelGithub, modelNote);
+        return new Person(modelName, modelClassGroup, modelEmail, modelPhone, modelTelegram, modelGithub, modelNotes);
     }
 }
