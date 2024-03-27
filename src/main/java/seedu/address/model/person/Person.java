@@ -19,7 +19,7 @@ public class Person {
     private final Name name;
     private final ClassGroup classGroup;
     private final Email email;
-    private final Phone phone;
+    private final Optional<Phone> phone;
     private final Optional<Telegram> telegram;
     private final Optional<Github> github;
     private final Notes notes;
@@ -27,7 +27,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, ClassGroup classGroup, Email email, Phone phone,
+    public Person(Name name, ClassGroup classGroup, Email email, Optional<Phone> phone,
                   Optional<Telegram> telegram, Optional<Github> github) {
         requireAllNonNull(name, classGroup, email, phone);
         this.name = name;
@@ -39,11 +39,27 @@ public class Person {
         this.notes = new Notes();
     }
 
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, ClassGroup classGroup, Email email, Optional<Phone> phone,
+                  Optional<Telegram> telegram, Optional<Github> github, Notes notes) {
+        requireAllNonNull(name, classGroup, email, phone);
+        this.name = name;
+        this.classGroup = classGroup;
+        this.email = email;
+        this.phone = phone;
+        this.telegram = telegram;
+        this.github = github;
+        this.notes = notes;
+    }
+
     public Name getName() {
         return name;
     }
 
-    public Phone getPhone() {
+    public Optional<Phone> getPhone() {
         return phone;
     }
 
@@ -63,7 +79,7 @@ public class Person {
         return github;
     }
 
-    public Notes getNote() {
+    public Notes getNotes() {
         return notes;
     }
 
@@ -78,12 +94,13 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same Email, Phone, Telegram (optional), or Github (optional).
+     * Returns true if both persons have the same Email, Phone (optional), Telegram (optional), or Github (optional).
      * Persons are allowed to have the same name.
      * This defines a weaker notion of equality between two persons.
      *
      * @param otherPerson The Person object whose fields are to be compared.
-     * @return True if both persons have either the same Email, Phone, Telegram (optional), or Github (optional).
+     * @return True if both persons have either the same Email, Phone (optional), Telegram (optional),
+     *     or Github (optional).
      */
     public boolean checkDuplicateField(Person otherPerson) {
         if (otherPerson == this) {
@@ -94,17 +111,19 @@ public class Person {
         }
 
         boolean isEmailEqual = otherPerson.getEmail().equals(getEmail());
-        boolean isPhoneEqual = otherPerson.getPhone().equals(getPhone());
+        boolean isBothPhoneNonEmpty = !getPhone().orElse(Phone.EMPTY).isEmpty()
+                && !otherPerson.getPhone().orElse(Phone.EMPTY).isEmpty();
         boolean isBothTelegramNonEmpty = !getTelegram().orElse(Telegram.EMPTY).isEmpty()
                 && !otherPerson.getTelegram().orElse(Telegram.EMPTY).isEmpty();
         boolean isBothGithubNonEmpty = !getGithub().orElse(Github.EMPTY).isEmpty()
                 && !otherPerson.getGithub().orElse(Github.EMPTY).isEmpty();
+        boolean isPhoneNonEmptyAndEqual = isBothPhoneNonEmpty && otherPerson.getPhone().equals(getPhone());
         boolean isTelegramNonEmptyAndEqual = isBothTelegramNonEmpty && otherPerson.getTelegram().equals(getTelegram());
         boolean isGithubNonEmptyAndEqual = isBothGithubNonEmpty && otherPerson.getGithub().equals(getGithub());
 
 
         return (isEmailEqual
-                || isPhoneEqual
+                || isPhoneNonEmptyAndEqual
                 || isTelegramNonEmptyAndEqual
                 || isGithubNonEmptyAndEqual);
     }
@@ -162,7 +181,7 @@ public class Person {
                 .add("name", name)
                 .add("classGroup", classGroup)
                 .add("email", email)
-                .add("phone", phone)
+                .add("phone", phone.isPresent() ? phone.get() : "")
                 .add("telegram", telegram.isPresent() ? telegram.get() : "")
                 .add("github", github.isPresent() ? github.get() : "")
                 .toString();
