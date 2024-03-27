@@ -37,8 +37,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johndoe@gmail.com "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_TELEGRAM + "@johndoe "
-            + PREFIX_GITHUB + "johnDoeGithub "
-            + PREFIX_ADDNOTE + "hardworking ";
+            + PREFIX_GITHUB + "johnDoeGithub ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_FIELD = "This person contains duplicate fields"
