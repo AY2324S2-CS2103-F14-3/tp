@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -21,13 +22,13 @@ public class Person {
     private final Phone phone;
     private final Optional<Telegram> telegram;
     private final Optional<Github> github;
-    private final Optional<Note> note;
+    private final Notes notes;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, ClassGroup classGroup, Email email, Phone phone,
-                  Optional<Telegram> telegram, Optional<Github> github, Optional<Note> note) {
+                  Optional<Telegram> telegram, Optional<Github> github) {
         requireAllNonNull(name, classGroup, email, phone);
         this.name = name;
         this.classGroup = classGroup;
@@ -35,7 +36,7 @@ public class Person {
         this.phone = phone;
         this.telegram = telegram;
         this.github = github;
-        this.note = note;
+        this.notes = new Notes();
     }
 
     public Name getName() {
@@ -62,8 +63,18 @@ public class Person {
         return github;
     }
 
-    public Optional<Note> getNote() {
-        return note;
+    public Notes getNote() {
+        return notes;
+    }
+
+    /**
+     * Adds a note to a person's notes
+     *
+     * @param note The note to be added.
+     */
+    public void addNote(Note note) {
+        requireNonNull(note);
+        notes.addNote(note);
     }
 
     /**
@@ -142,7 +153,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, classGroup, email, phone, telegram, github, note);
+        return Objects.hash(name, classGroup, email, phone, telegram, github);
     }
 
     @Override
@@ -154,7 +165,6 @@ public class Person {
                 .add("phone", phone)
                 .add("telegram", telegram.isPresent() ? telegram.get() : "")
                 .add("github", github.isPresent() ? github.get() : "")
-                .add("note", note.isPresent() ? note.get().toString() : "")
                 .toString();
     }
 }
