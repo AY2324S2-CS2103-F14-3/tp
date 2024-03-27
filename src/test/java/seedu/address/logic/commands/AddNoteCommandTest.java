@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
@@ -38,43 +41,43 @@ public class AddNoteCommandTest {
                 new Name("John"),
                 new ClassGroup("2A"),
                 new Email("john@gmail.com"),
-                new Phone("98989898"),
+                Optional.of(new Phone("98989898")),
                 Optional.of(new Telegram("@john")),
                 Optional.of(new Github("johncena")),
-                Optional.of(Note.EMPTY)
+                new Notes(new ArrayList<>(List.of("hardworking")))
         );
 
         model.addPerson(person);
 
         int index = model.getFilteredPersonList().indexOf(person);
 
-        AddNoteCommand addNoteCommand = new AddNoteCommand(Index.fromZeroBased(index), "hardworking");
+        AddNoteCommand addNoteCommand = new AddNoteCommand(Index.fromZeroBased(index), new Note("hardworking"));
 
         CommandResult commandResult = addNoteCommand.execute(model);
 
-        String expectedMessage = String.format(AddNoteCommand.MESSAGE_ADD_NOTE_SUCCESS, person);
+        String expectedMessage = String.format(AddNoteCommand.MESSAGE_SUCCESS, person);
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
 
         Person updatedPerson = model.getFilteredPersonList().get(index);
 
-        assertTrue(updatedPerson.getNote().isPresent());
-        assertTrue(updatedPerson.getNote().get().getNote().contains("hardworking"));
+        assertTrue(updatedPerson.getNotes().equals(person.getNotes()));
+        assertTrue(updatedPerson.getNotes().getAsStrings().contains("hardworking"));
     }
 
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        AddNoteCommand addNoteCommand = new AddNoteCommand(outOfBoundIndex, "Some note");
+        AddNoteCommand addNoteCommand = new AddNoteCommand(outOfBoundIndex, new Note("hardworking"));
 
         assertCommandFailure(addNoteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final AddNoteCommand standardCommand = new AddNoteCommand(INDEX_FIRST_PERSON, "Test note");
+        final AddNoteCommand standardCommand = new AddNoteCommand(INDEX_FIRST_PERSON, new Note("hardworking"));
 
-        AddNoteCommand commandWithSameValues = new AddNoteCommand(INDEX_FIRST_PERSON, "Test note");
+        AddNoteCommand commandWithSameValues = new AddNoteCommand(INDEX_FIRST_PERSON, new Note("hardworking"));
 
         assertEquals(standardCommand, commandWithSameValues);
 
@@ -84,6 +87,6 @@ public class AddNoteCommandTest {
 
         assertTrue(!standardCommand.equals(new ClearCommand()));
 
-        assertTrue(!standardCommand.equals(new AddNoteCommand(INDEX_FIRST_PERSON, "Different note")));
+        assertTrue(!standardCommand.equals(new AddNoteCommand(INDEX_FIRST_PERSON, new Note("hardworkings"))));
     }
 }

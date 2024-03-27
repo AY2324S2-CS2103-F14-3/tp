@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Note;
 
 public class AddNoteCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
@@ -20,7 +21,7 @@ public class AddNoteCommandParserTest {
     @Test
     public void parse_validInput_success() throws ParseException {
         String args = "1 hardworking";
-        AddNoteCommand expectedCommand = new AddNoteCommand(Index.fromOneBased(1), "hardworking");
+        AddNoteCommand expectedCommand = new AddNoteCommand(Index.fromOneBased(1), new Note("hardworking"));
         assertEquals(expectedCommand, parser.parse(args));
     }
 
