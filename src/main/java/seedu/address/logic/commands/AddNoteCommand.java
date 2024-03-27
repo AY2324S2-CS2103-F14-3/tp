@@ -1,11 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDNOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,14 +14,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.ClassGroup;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Github;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Telegram;
 
 /**
  * Adds a note for a person identified by their index number in the displayed person list.
@@ -31,75 +24,51 @@ public class AddNoteCommand extends Command {
     public static final String COMMAND_WORD = "adn";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Add a note for the person identified by the index number used in the displayed person list."
-            + " Parameters: "
-            + PREFIX_ADDNOTE + "INDEX (must be a positive integer) STRING (must contain only alphanumeric characters"
-                + " and symbols."
-            + " Example: " + COMMAND_WORD + " 1 hardworking";
+            + ": Adds a note to a person identified by the index number used in the displayed person list.\n"
+            + "Parameters:"
+            + PREFIX_INDEX + "INDEX (must be a positive integer) "
+            + PREFIX_NOTE + "NOTE\n"
+            + "Example: "
+            + COMMAND_WORD + " "
+            + PREFIX_INDEX + "1 "
+            + PREFIX_NOTE + "hardworking";
 
-    public static final String MESSAGE_ADD_NOTE_SUCCESS = "New note added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New note added to %1$s.\nNote: %2$s";
 
     private static final Logger logger = LogsCenter.getLogger(AddNoteCommand.class);
 
-    private final Index targetIndex;
+    private final Index index;
 
-    private final String noteToAdd;
+    private final Note note;
 
     /**
-     * Constructs an AddNoteCommand to add a note to the person at the specified index.
-     *
-     * @param targetIndex The index of the person to add the note to.
-     * @param noteToAdd   The note content to add.
+     * @param index of the person in the filtered person list to add a note
+     * @param note the note that should be added
      */
-    public AddNoteCommand(Index targetIndex, String noteToAdd) {
-        this.targetIndex = targetIndex;
-        this.noteToAdd = noteToAdd;
+    public AddNoteCommand(Index index, Note note) {
+        requireNonNull(index);
+        requireNonNull(note);
+
+        this.index = index;
+        this.note = note;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToAddNote = lastShownList.get(targetIndex.getZeroBased());
-        Optional<Note> currNote = personToAddNote.getNote();
-        Note note = currNote.orElse(Note.EMPTY);
-        note.addNote(noteToAdd);
+        Person personToAddNote = lastShownList.get(index.getZeroBased());
+        personToAddNote.addNote(note);
 
-        // Log a message indicating the note addition
-        logger.log(Level.INFO, "Added note '" + noteToAdd + "' to person: " + personToAddNote);
+        logger.log(Level.INFO, "Added note '" + note.toString() + "' to person: " + personToAddNote);
 
-        return new CommandResult(String.format(MESSAGE_ADD_NOTE_SUCCESS, Messages.format(personToAddNote)));
-    }
-
-    private static Person createAddedNotePerson(Person personToAddNote, ArrayList<String> notesArr) {
-        assert personToAddNote != null;
-
-        Name updatedName = personToAddNote.getName();
-        ClassGroup updatedClassGroup = personToAddNote.getClassGroup();
-        Email updatedEmail = personToAddNote.getEmail();
-        Phone updatedPhone = personToAddNote.getPhone();
-        Optional<Telegram> updatedTelegram = personToAddNote.getTelegram().isPresent()
-                ? personToAddNote.getTelegram() : Optional.of(Telegram.EMPTY);
-        Optional<Github> updatedGithub = personToAddNote.getGithub().isPresent()
-                ? personToAddNote.getGithub() : Optional.of(Github.EMPTY);
-        return new Person(updatedName, updatedClassGroup, updatedEmail,
-                updatedPhone, updatedTelegram, updatedGithub, Optional.of(new Note(notesArr)));
-    }
-
-    // For now, allow duplicate notes. Will include implementation to exclude it and not allow duplicate notes
-    private void updatePerson(Person personToAddNote, Person addedNotePerson, Model model) {
-        model.deletePerson(personToAddNote);
-        model.addPersonKeepFilter(addedNotePerson);
-    }
-
-    private void updateLastViewedPersonIfNecessary(Person personToAddNote, Person addedNotePerson, Model model) {
-        model.getLastViewedPerson()
-                .filter(lastViewedPerson -> lastViewedPerson.equals(personToAddNote))
-                .ifPresent(lastViewedPerson -> model.updateLastViewedPerson(addedNotePerson));
+        String message = String.format(MESSAGE_SUCCESS, Messages.format(personToAddNote), note);
+        return new CommandResult(message);
     }
 
     /**
@@ -119,8 +88,9 @@ public class AddNoteCommand extends Command {
             return false;
         }
 
-        AddNoteCommand otherViewCommand = (AddNoteCommand) other;
-        return noteToAdd.equals(otherViewCommand.noteToAdd);
+        AddNoteCommand otherAddNoteCommand = (AddNoteCommand) other;
+        return index.equals(otherAddNoteCommand.index)
+                && note.equals(otherAddNoteCommand.note);
     }
 
     /**
@@ -131,8 +101,8 @@ public class AddNoteCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .add("noteToAdd", noteToAdd)
+                .add("index", index)
+                .add("note", note)
                 .toString();
     }
 }
