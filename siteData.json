@@ -118,6 +118,8 @@
         "updating-a-person-uc": "Updating a person : uc",
         "locating-persons-by-name-find": "Locating persons by name: find",
         "viewing-a-person-view": "Viewing a person : view",
+        "adding-note-to-a-person-an": "Adding note to a person : an",
+        "deleting-note-from-a-person-dn": "Deleting note from a person : dn",
         "deleting-a-person-dc": "Deleting a person : dc",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
