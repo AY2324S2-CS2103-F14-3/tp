@@ -161,9 +161,8 @@
     },
     {
       "src": "team/kailashgautham.md",
-      "title": "Kailash Gautham's Project Portfolio Page",
       "headings": {
-        "project-tatoolkit-level-3": "Project: TaToolkit Level 3"
+        "project-tatoolkit": "Project: TaToolkit"
       },
       "headingKeywords": {}
     },
