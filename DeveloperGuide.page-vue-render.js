@@ -485,6 +485,6 @@ with(this){return _c('ol',[_c('li',[_c('p',[_v("Dealing with missing/corrupted d
 with(this){return _c('h2',{attrs:{"id":"planned-enhancements"}},[_v("Planned Enhancements"),_c('a',{staticClass:"fa fa-anchor",attrs:{"href":"#planned-enhancements","onclick":"event.stopPropagation()"}})])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Mon, 8 Apr 2024, 14:24:40 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Mon, 8 Apr 2024, 17:10:07 GMT+8]")])])])}
 }];
   
