@@ -62,10 +62,12 @@
         "use-cases": "Use cases",
         "non-functional-requirements": "Non-Functional Requirements",
         "glossary": "Glossary",
-        "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
+        "appendix": "Appendix",
+        "instructions-for-manual-testing": "Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-person": "Deleting a person",
-        "saving-data": "Saving data"
+        "saving-data": "Saving data",
+        "planned-enhancements": "Planned Enhancements"
       },
       "headingKeywords": {}
     },
@@ -159,9 +161,8 @@
     },
     {
       "src": "team/kailashgautham.md",
-      "title": "Kailash Gautham's Project Portfolio Page",
       "headings": {
-        "project-tatoolkit-level-3": "Project: TaToolkit Level 3"
+        "project-tatoolkit": "Project: TaToolkit"
       },
       "headingKeywords": {}
     },
