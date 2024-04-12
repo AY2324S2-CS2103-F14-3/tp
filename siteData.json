@@ -42,6 +42,7 @@
       "headings": {
         "ta-toolkit-developer-guide": "TA Toolkit Developer Guide",
         "acknowledgements": "Acknowledgements",
+        "ng-yu-soon-s-acknowledgements": "Ng Yu Soon's Acknowledgements",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
         "architecture": "Architecture",
@@ -202,7 +203,10 @@
       "src": "team/yusoonz.md",
       "title": "Yu Soon's Project Portfolio Page",
       "headings": {
-        "project-tatoolkit-level-3": "Project: TaToolkit Level 3"
+        "project-tatoolkit-level-3": "Project: TaToolkit Level 3",
+        "technical-skills": "Technical Skills",
+        "challenges-and-problem-solving": "Challenges and Problem-Solving",
+        "results-and-impact": "Results and Impact"
       },
       "headingKeywords": {}
     },
