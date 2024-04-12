@@ -575,6 +575,6 @@ with(this){return _c('p',[_c('strong',[_v("Issue")]),_v(": This could lead to un
 with(this){return _c('p',[_c('strong',[_v("Enhancement")]),_v(": We plan on introducing checks to ensure that there are no duplicate keys for any of the JSON objects in the storage file.\nThis will cause TA Toolkit to throw an error and reset the data if the storage file is invalid.")])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Fri, 12 Apr 2024, 17:30:31 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Fri, 12 Apr 2024, 19:19:58 GMT+8]")])])])}
 }];
   
