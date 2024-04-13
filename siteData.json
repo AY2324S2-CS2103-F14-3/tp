@@ -180,10 +180,16 @@
       "headingKeywords": {}
     },
     {
-      "src": "team/ivan.md",
+      "src": "team/hiivan.md",
       "title": "Ivan's Project Portfolio Page",
       "headings": {
-        "project-tatoolkit-level-3": "Project: TaToolkit Level 3"
+        "project-tatoolkit": "Project: TaToolkit",
+        "dynamic-side-panel-integration": "Dynamic Side Panel Integration",
+        "view-person-details": "View Person Details",
+        "attendance-view": "Attendance View",
+        "intelligent-command-recognition": "Intelligent Command Recognition",
+        "adherence-to-mvc-architecture": "Adherence to MVC Architecture",
+        "other-links": "Other Links"
       },
       "headingKeywords": {}
     },
