@@ -530,13 +530,13 @@ with(this){return _c('h2',{attrs:{"id":"appendix-planned-enhancements"}},[_v("Ap
 with(this){return _c('h3',{attrs:{"id":"better-name-validation"}},[_v("Better name validation"),_c('a',{staticClass:"fa fa-anchor",attrs:{"href":"#better-name-validation","onclick":"event.stopPropagation()"}})])}
 },function anonymous(
 ) {
-with(this){return _c('p',[_c('strong',[_v("Background")]),_v(": Currently, TA Toolkit only allows contacts' name to contain alphanumeric characters and spaces.")])}
+with(this){return _c('p',[_c('strong',[_v("Background")]),_v(": Currently, TA Toolkit only allows contacts' name to contain alphanumeric characters and spaces. Furthermore,\nnames \"John Doe\" and \"John  Doe\" are considered different names due to the extra whitespace.")])}
 },function anonymous(
 ) {
-with(this){return _c('p',[_c('strong',[_v("Issue")]),_v(": The strict restrictions will prevent some valid names from being accepted.\nFor example, \"Ravi S/O Ramasamy\" is rejected as it contains a '/' character.")])}
+with(this){return _c('p',[_c('strong',[_v("Issue")]),_v(": The strict restrictions will prevent some valid names from being accepted.\nFor example, \"Ravi S/O Ramasamy\" is rejected as it contains a '/' character.\nAs for the extra whitespace between words in a name, it might confuse the user when searching for a contact.")])}
 },function anonymous(
 ) {
-with(this){return _c('p',[_c('strong',[_v("Enhancement")]),_v(": We plan on changing the parameter prefixes to use the '=' character instead of the '/' character.\nFurthermore, we will loosen the restrictions on names to allow the '/' character.\nThis will allow the TA Toolkit to accept legal names containing the '/' character.")])}
+with(this){return _c('p',[_c('strong',[_v("Enhancement")]),_v(": We plan on changing the parameter prefixes to use the '=' character instead of the '/' character.\nFurthermore, we will loosen the restrictions on names to allow the '/' character.\nThis will allow the TA Toolkit to accept legal names containing the '/' character.\nWe will also trim the extra whitespace between words in a name to prevent confusion when searching for a contact.")])}
 },function anonymous(
 ) {
 with(this){return _c('h3',{attrs:{"id":"better-email-validation"}},[_v("Better email validation"),_c('a',{staticClass:"fa fa-anchor",attrs:{"href":"#better-email-validation","onclick":"event.stopPropagation()"}})])}
@@ -614,6 +614,6 @@ with(this){return _c('p',[_c('strong',[_v("Issue")]),_v(": This could introduce 
 with(this){return _c('p',[_c('strong',[_v("Enhancement")]),_v(": We plan on changing the background colour of the application to match the Nord theme, which will provide a more consistent user experience.")])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Sat, 13 Apr 2024, 11:07:47 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Sat, 13 Apr 2024, 11:20:50 GMT+8]")])])])}
 }];
   
