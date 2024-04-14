@@ -38,7 +38,7 @@ with(this){return _c('ul',[_c('li',[_v("Used ChatGPT to assist in writing my Pro
 with(this){return _c('h3',{attrs:{"id":"axel-teo-s-acknowledgements"}},[_v("Axel Teo's Acknowledgements"),_c('a',{staticClass:"fa fa-anchor",attrs:{"href":"#axel-teo-s-acknowledgements","onclick":"event.stopPropagation()"}})])}
 },function anonymous(
 ) {
-with(this){return _c('ul',[_c('li',[_v("Used ChatGPT to assist in writing my Project Portfolio Page in "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("doc/team/teojunda.md")]),_v(".")])])}
+with(this){return _c('ul',[_c('li',[_v("Used ChatGPT to assist in writing my Project Portfolio Page in "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("docs/team/teojunda.md")]),_v(".")])])}
 },function anonymous(
 ) {
 with(this){return _c('h2',{attrs:{"id":"setting-up-getting-started"}},[_c('strong',[_v("Setting up, getting started")]),_c('a',{staticClass:"fa fa-anchor",attrs:{"href":"#setting-up-getting-started","onclick":"event.stopPropagation()"}})])}
@@ -617,6 +617,6 @@ with(this){return _c('p',[_c('strong',[_v("Issue")]),_v(": This could introduce 
 with(this){return _c('p',[_c('strong',[_v("Enhancement")]),_v(": We plan on changing the background colour of the application to match the Nord theme, which will provide a more consistent user experience.")])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Sun, 14 Apr 2024, 17:21:42 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Sun, 14 Apr 2024, 17:34:32 GMT+8]")])])])}
 }];
   
